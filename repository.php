@@ -68,7 +68,7 @@ function getRepository($opt) {
         $id = hsc($plugin['plugin']);
         $feed .= '<plugin>';
         $feed .= '<id>'.$id.'</id>';
-        $feed .= '<dokulink>'.($plugin['type'] == 32 ? $id : 'plugin:'.$id).'</dokulink>';
+        $feed .= '<dokulink>'.($plugin['type'] == 32 ? $id : 'add-on:'.$id).'</dokulink>';
         $feed .= '<popularity>'.$plugin['popularity'].'</popularity>';
         $feed .= '<name>'.hsc($plugin['name']).'</name>';
         $feed .= '<description>'.hsc($plugin['description']).'</description>';

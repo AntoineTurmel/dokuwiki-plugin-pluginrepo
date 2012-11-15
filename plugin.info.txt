@@ -1,7 +1,7 @@
 base   pluginrepo
-author Andreas Gohr/Håkan Sandell
-email  sandell.hakan@gmail.com
-date   2012-11-06
+author Andreas Gohr/Håkan Sandell/Antoine Turmel
+email  geekshadow@gmail.com
+date   2012-11-15
 name   Repository plugin
 desc   Helps organizing the plugin repository
-url    https://github.com/splitbrain/dokuwiki-plugin-pluginrepo/zipball/master
+url    https://github.com/GeekShadow/dokuwiki-plugin-pluginrepo/zipball/ngale

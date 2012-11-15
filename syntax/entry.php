@@ -48,8 +48,8 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer (actual pattern used doesn't matter, namespace controls plugin type)
      */
     function connectTo($mode) {
-        $this->Lexer->addSpecialPattern('----+ *plugin *-+\n.*?\n----+',$mode,'plugin_pluginrepo_entry');
-        $this->Lexer->addSpecialPattern('----+ *template *-+\n.*?\n----+',$mode,'plugin_pluginrepo_entry');
+        $this->Lexer->addSpecialPattern('----+ *add-on *-+\n.*?\n----+',$mode,'plugin_pluginrepo_entry');
+        $this->Lexer->addSpecialPattern('----+ *feather *-+\n.*?\n----+',$mode,'plugin_pluginrepo_entry');
     }
 
     /**
@@ -59,8 +59,8 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         global $ID;
 
         $data = $this->hlp->parseData($match);
-        if (curNS($ID) == 'template') {
-            $data['type'] = 'template';
+        if (curNS($ID) == 'feather') {
+            $data['type'] = 'feather';
         }
         return $data;
     }
@@ -71,7 +71,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     function render($format, &$renderer, $data) {
         global $ID;
 
-        if (curNS($ID) == 'plugin') {
+        if (curNS($ID) == 'add-on') {
             $id = noNS($ID);
         } else {
             $id = curNS($ID).':'.noNS($ID);
@@ -100,7 +100,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $rel = $this->hlp->getPluginRelations($id);
         $type = $this->hlp->parsetype($data['type']);
-        $extensionType = ($type == 32) ? 'template':'plugin';
+        $extensionType = ($type == 32) ? 'feather':'add-on';
         $hasUnderscoreIssue = (strpos($id,'_') !== false);
 
         $R->doc .= '<div class="pluginrepo_entry">'.NL;

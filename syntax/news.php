@@ -89,7 +89,7 @@ class syntax_plugin_pluginrepo_news extends DokuWiki_Syntax_Plugin {
     function showSameAuthor(&$R, $data) {
         global $ID;
 
-        if (curNS($ID) == 'plugin') {
+        if (curNS($ID) == 'add-on') {
             $id = noNS($ID);
         } else {
             $id = curNS($ID).':'.noNS($ID);
@@ -119,7 +119,7 @@ class syntax_plugin_pluginrepo_news extends DokuWiki_Syntax_Plugin {
         }
         for ($i = 0; $i < $limit; $i++) {
             $row = $plugins[$start+$i];
-            $linkText = ucfirst(noNS($row['plugin'])).($row['type']==32?' template':' plugin');
+            $linkText = ucfirst(noNS($row['plugin'])).($row['type']==32?' feather':' add-on');
             $R->doc .= '<p class="title">'.$this->hlp->pluginlink($R, $row['plugin'], $linkText).'</p>'.NL;
             $R->doc .= '<p class="description">'.$row['description'].'</p>'.NL;
 

@@ -12,12 +12,12 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
     var $dokuReleases;             // array of DokuWiki releases (name & date)
 
     var $types = array(
-                    1  => 'Syntax',
-                    2  => 'Admin',
-                    4  => 'Action',
-                    8  => 'Render',
-                    16 => 'Helper',
-                    32 => 'Template');
+                    1  => 'Music & Video',
+                    2  => 'Library & Playlists',
+                    4  => 'Device & Services',
+                    8  => 'Web Browser',
+                    16 => 'Tools',
+                    32 => 'Feathers');
 
     var $obsoleteTag = '!obsolete';
     var $bundled;
@@ -369,7 +369,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
      */
     function pluginlink(&$R,$plugin,$title=null) {
         if (!getNS($plugin)) {
-            return $R->internallink(':plugin:'.$plugin,$title,null,true);
+            return $R->internallink(':add-on:'.$plugin,$title,null,true);
         } else {
             if (!$title) $title = noNS($plugin);
             return $R->internallink(':'.$plugin,$title,null,true);
@@ -397,7 +397,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             }
         }
 
-        preg_match_all('/([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\+?|[a-z A-Z]{4,}\+?)/', $compatible, $matches);
+        preg_match_all('/([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\+?|[a-z A-Z 0-9 .]{4,}\+?)/', $compatible, $matches);
         $matches[0] = array_map('strtolower',$matches[0]);
         $matches[0] = array_map('trim',$matches[0]);
         $retval = array();

@@ -142,24 +142,24 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
 
         $R->doc .= '<ul class="types">'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typesyntax'),$this->hlp->listtype(1,$ID));
+        $R->doc .= sprintf($this->getLang('t_typemusicvideo'),$this->hlp->listtype(1,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typeaction'),$this->hlp->listtype(4,$ID));
+        $R->doc .= sprintf($this->getLang('t_typelibrarypl'),$this->hlp->listtype(4,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typeadmin'),$this->hlp->listtype(2,$ID));
+        $R->doc .= sprintf($this->getLang('t_typedeviceservices'),$this->hlp->listtype(2,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typehelper'),$this->hlp->listtype(16,$ID));
+        $R->doc .= sprintf($this->getLang('t_typewebbrowser'),$this->hlp->listtype(16,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typerender'),$this->hlp->listtype(8,$ID));
+        $R->doc .= sprintf($this->getLang('t_typetools'),$this->hlp->listtype(8,$ID));
         $R->doc .= '</div></li>'.NL;
 
         if ($data['includetemplates']) {
             $R->doc .= '<li><div class="li">';
-            $R->doc .= sprintf($this->getLang('t_typetemplate'),$this->hlp->listtype(32,$ID));
+            $R->doc .= sprintf($this->getLang('t_typefeathers'),$this->hlp->listtype(32,$ID));
             $R->doc .= '</div></li>'.NL;
         }
         $R->doc .= '</ul>'.NL;
@@ -319,7 +319,7 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
         $compatgroup = 'xx9999-99-99';
         $tmpChar = '';
         foreach($plugins as $row) {
-            $id = (getNS($row['plugin']) ? $row['plugin'] : ':plugin:'.$row['plugin']);
+            $id = (getNS($row['plugin']) ? $row['plugin'] : ':add-on:'.$row['plugin']);
             if(!page_exists(cleanID($id))){
                 $this->hlp->deletePlugin($row['plugin']);
                 continue;
@@ -354,7 +354,7 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
             $R->doc .= '<div class="mainInfo">'.NL;
             // extension name and link
             $R->doc .= '<strong>';
-            $R->doc .= $this->hlp->pluginlink($R, $row['plugin'], $row['name'].($row['type']==32?' template':' plugin'));
+            $R->doc .= $this->hlp->pluginlink($R, $row['plugin'], $row['name'].($row['type']==32?' feather':' add-on'));
             $R->doc .= '</strong>'.NL;
             // download
             if($row['downloadurl'] && !$row['securityissue'] && !$row['securitywarning']){
@@ -445,7 +445,7 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
         $R->doc .= '</tr>';
 
         foreach($plugins as $row) {
-            $id = (getNS($row['plugin']) ? $row['plugin'] : ':plugin:'.$row['plugin']);
+            $id = (getNS($row['plugin']) ? $row['plugin'] : ':add-on:'.$row['plugin']);
             if(!page_exists(cleanID($id))){
                 $this->hlp->deletePlugin($row['plugin']);
                 continue;
