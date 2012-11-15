@@ -145,16 +145,16 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
         $R->doc .= sprintf($this->getLang('t_typemusicvideo'),$this->hlp->listtype(1,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typelibrarypl'),$this->hlp->listtype(4,$ID));
+        $R->doc .= sprintf($this->getLang('t_typedeviceservices'),$this->hlp->listtype(4,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typedeviceservices'),$this->hlp->listtype(2,$ID));
+        $R->doc .= sprintf($this->getLang('t_typelibrarypl'),$this->hlp->listtype(2,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typewebbrowser'),$this->hlp->listtype(16,$ID));
+        $R->doc .= sprintf($this->getLang('t_typetools'),$this->hlp->listtype(16,$ID));
         $R->doc .= '</div></li>'.NL;
         $R->doc .= '<li><div class="li">';
-        $R->doc .= sprintf($this->getLang('t_typetools'),$this->hlp->listtype(8,$ID));
+        $R->doc .= sprintf($this->getLang('t_typewebbrowser'),$this->hlp->listtype(8,$ID));
         $R->doc .= '</div></li>'.NL;
 
         if ($data['includetemplates']) {
