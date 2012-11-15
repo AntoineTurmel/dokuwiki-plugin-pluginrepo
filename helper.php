@@ -397,7 +397,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             }
         }
 
-        preg_match_all('/([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\+?|[a-z A-Z 0-9 .]{4,}\+?)/', $compatible, $matches);
+        preg_match_all('/([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]\+?|[a-z A-Z 0-9 .]{3,}\+?)/', $compatible, $matches);
         $matches[0] = array_map('strtolower',$matches[0]);
         $matches[0] = array_map('trim',$matches[0]);
         $retval = array();
