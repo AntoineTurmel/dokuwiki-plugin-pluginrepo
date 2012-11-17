@@ -209,6 +209,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             foreach ($this->hlp->dokuReleases as $release) {
                 if (++$cols > 4) break;
                 $value = $this->getLang('compatible_unknown');
+                $compaticon = "";
                 if (array_key_exists($release['date'], $compatibility)) {
                     $value = $this->getLang('compatible_yes');
                     $compaticon = "yes";
