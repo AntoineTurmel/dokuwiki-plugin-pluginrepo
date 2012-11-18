@@ -216,7 +216,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
                     }
                     $norecentcompat = false;
                 }
-                $compatrow .= '<li class="'.$value.'">'.$release['date'].' '.$release['label'];
+                $compatrow .= '<li class="'.$value.'">'.$release['label'];
                 $compatrow .= '&nbsp;<strong><span>'.$value.'</span></strong></li>'.NL;
             }
 
