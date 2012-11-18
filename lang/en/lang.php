@@ -81,7 +81,7 @@ $lang['t_sortcompatible']    = 'Sort by compatibility';
 $lang['t_screenshot']        = 'Screenshot';
 
 $lang['t_download']          = 'Download';
-$lang['t_provides']          = 'Provides';
+$lang['t_provides']          = 'Categories';
 $lang['t_tags']              = 'Tags';
 $lang['t_bundled']           = 'bundled';
 
