@@ -9,7 +9,7 @@
 // Plugin entry
 $lang['by']                  = 'by';
 $lang['last_updated_on']     = 'Last updated on';
-$lang['provides']            = 'Provides';
+$lang['provides']            = 'Categories';
 $lang['compatible_with']     = 'Compatible with Nightingale%s';
 $lang['compatible_with_info']= 'Please update this field';
 $lang['no_compatibility']    = 'No compatibility info given!';
