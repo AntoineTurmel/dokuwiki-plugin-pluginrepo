@@ -12,12 +12,14 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
     var $dokuReleases;             // array of DokuWiki releases (name & date)
 
     var $types = array(
-                    1  => 'Syntax',
-                    2  => 'Admin',
-                    4  => 'Action',
-                    8  => 'Render',
-                    16 => 'Helper',
-                    32 => 'Template');
+                    1   => 'Syntax',
+                    2   => 'Admin',
+                    4   => 'Action',
+                    8   => 'Render',
+                    16  => 'Helper',
+                    32  => 'Template',
+                    64  => 'Remote',
+                    128 => 'Auth');
 
     var $obsoleteTag = '!obsolete';
     var $bundled;
@@ -167,7 +169,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugin_tags B, plugins A
-                                         WHERE A.type < 32 AND $shown
+                                         WHERE A.type <> 32 AND $shown
                                            AND (A.type & :type)
                                            AND A.plugin = B.plugin
                                            AND B.tag = :tag
@@ -182,7 +184,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type < 32 AND $shown
+                                         WHERE A.type <> 32 AND $shown
                                            AND (A.type & :type)
                                  $sortsql");
             $stmt->execute(array(':type' => $type));
@@ -195,7 +197,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type < 32 AND $shown
+                                         WHERE A.type <> 32 AND $shown
                                     $pluginsql
                                  $sortsql");
             $stmt->execute($plugins);
@@ -236,6 +238,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
      *   'conflicts'  array of plugin names
      *   'similar'    array of plugin names
      *   'depends'    array of plugin names
+     *   'needed'     array of plugin names
      *   'sameauthor' array of plugin names
      */
     function getPluginRelations($id) {
@@ -266,6 +269,14 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         foreach ($stmt as $row) {
             $meta['depends'][] = $row['other'];
         }
+
+
+        $stmt = $db->prepare('SELECT plugin FROM plugin_depends WHERE other = ? ');
+        $stmt->execute(array($id));
+        foreach ($stmt as $row) {
+            $meta['needed'][] = $row['plugin'];
+        }
+
 
         $stmt = $db->prepare('SELECT plugin FROM plugins WHERE plugin <> ? AND email <> "" AND email=(SELECT email FROM plugins WHERE plugin = ?)');
         $stmt->execute(array($id,$id));
