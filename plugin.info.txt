@@ -1,7 +1,7 @@
 base   pluginrepo
 author Andreas Gohr/Håkan Sandell/Antoine Turmel
 email  geekshadow@gmail.com
-date   2012-11-15
+date   2013-04-02
 name   Repository plugin
-desc   Helps organizing the plugin repository
+desc   Hosting nightingale xpi add-ons
 url    https://github.com/GeekShadow/dokuwiki-plugin-pluginrepo/zipball/ngale
