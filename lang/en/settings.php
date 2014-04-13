@@ -5,4 +5,3 @@ $lang['db_user']     = 'Database user';
 $lang['db_pass']     = 'Database password';
 $lang['bundled']     = 'Add-ons bundled with current version, comma separated';
 $lang['releases']    = 'List of releases (yyyy-mm-dd "name"), comma separated';
-

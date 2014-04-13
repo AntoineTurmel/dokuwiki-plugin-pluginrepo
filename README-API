@@ -1,0 +1,97 @@
+====== API Endpoint ======
+
+===== Commands =====
+
+Using the ''cmd'' parameter defines what is returned by the API.
+
+  * ''ping'' -- just returns a single 1 to show the connection is working
+  * ''query'' -- default query action described below
+
+
+===== Formats =====
+
+Defines the output format and is specified by the ''fmt'' parameter. Can be:
+
+  * ''debug'' -- print_r for easy browsing
+  * ''xml'' -- XML, should not be used if can be avoided
+  * ''yaml'' -- YAML encoded data
+  * ''php'' -- PHP serialized data
+  * ''json'' -- JSON encoded data (default)
+    * give a callback name as ''cb'' parameter and it's JSONP
+
+example: ''api.php?fmt=json&cb=my_callback''
+
+===== Filters =====
+
+All filters can be combined and will be ANDed together.
+
+==== Extension Name ====
+
+Provide one or multiple names in the ''ext[]'' parameter. Prefix with ''template:''
+for templates.
+
+Only full matches currently.
+
+example: ''api.php?ext[]=wrap&ext[]=template:ach''
+
+==== Fulltext Search ====
+
+The parameter ''q'' allows to specify a full text query (with query expansion). If
+no ''limit'' was given, the limit is set to ''50''. If no ''order'' was given the
+result is sorted by the result score.
+
+The fulltext index uses the fields plugin, name, description, author and tag.
+
+example: ''api.php?q=wrap''
+
+==== Type ====
+
+To filter by the type use the ''type'' parameter, multiple types can be added together.
+
+Supported:
+
+  * 1   => 'Syntax',
+  * 2   => 'Admin',
+  * 4   => 'Action',
+  * 8   => 'Render',
+  * 16  => 'Helper',
+  * 32  => 'Template',
+  * 64  => 'Remote',
+  * 128 => 'Auth'
+
+example: ''api.php?type=5''
+
+==== Tags ====
+
+Filter by one or multiple tags (OR) using the ''tag[]'' parameter.
+
+Only full matches currently.
+
+example: ''api.php?tag[]=media&tag[]=video''
+
+==== Email ====
+
+We do not expose email addresses to avoid spamming. Instead the MD5 of the lowercased
+email address is used. You can use it to query by email address(es) using the ''mail''
+parameter.
+
+example: ''api.php?mail[]=4933823dc5f71300a20a506869fcf4d9''
+
+===== Ordering =====
+
+You can influence the ordering of the results using the ''order'' parameter.
+
+Supported fields:
+
+  * lastupdate
+  * popularity
+  * plugin ('default')
+  * all other non-derived DB fields
+
+example: ''api.php?order=lastupdate''
+
+===== Limit =====
+
+You can limit the number of results using the ''limit'' parameter.
+
+example: ''api.php?limit=5''
