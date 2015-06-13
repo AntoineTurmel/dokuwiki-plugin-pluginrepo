@@ -12,12 +12,13 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
     public $dokuReleases; // array of DokuWiki releases (name & date)
 
     public $types = array(
-        1  => 'Music & Video',
-        2  => 'Library & Playlists',
-        4  => 'Device & Services',
-        8  => 'Web Browser',
-        16 => 'Tools',
-        32 => 'Feathers'
+        1  => 'Library & Playlists',
+        2  => 'Sound & Playback',
+        4  => 'Devices & Hardware',
+        8  => 'Web Services',
+        16 => 'Web Browser',
+        32 => 'Tools & Utilities',
+        64 => 'Feathers'
     );
 
 
