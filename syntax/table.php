@@ -311,7 +311,8 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
             $R->doc .= '<th class="screenshot">'.$this->getLang('t_screenshot').'</th>'.NL;
         }
         $R->doc .= '  <th class="lastupdate">  <a href="'.wl($ID,$linkopt.'pluginsort='.($sort=='^d'?'d':'^d').'#extension__table').'" title="'.$this->getLang('t_sortdate').  '">'.  ($sortcol=='d'?$sortarr:'').$this->getLang('t_date').'</a></th>'.NL;
-        $R->doc .= '  <th class="popularity">  <a href="'.wl($ID,$linkopt.'pluginsort='.($sort=='^c'?'c':'^c').'#extension__table').'" title="'.$this->getLang('t_sortpopularity').'">'.($sortcol=='c'?$sortarr:'').$this->getLang('t_popularity').'</a></th>'.NL;
+        // Remove Popularity column for now
+        //$R->doc .= '  <th class="popularity">  <a href="'.wl($ID,$linkopt.'pluginsort='.($sort=='^c'?'c':'^c').'#extension__table').'" title="'.$this->getLang('t_sortpopularity').'">'.($sortcol=='c'?$sortarr:'').$this->getLang('t_popularity').'</a></th>'.NL;
         if ($data['compatible'] == 'yes') {
             $R->doc .= '  <th><a href="'.wl($ID,$linkopt.'pluginsort='.($sort=='^v'?'v':'^v').'#extension__table').'" title="'.$this->getLang('t_sortcompatible').'">'.  ($sortcol=='v'?$sortarr:'').$this->getLang('t_compatible').'</a></th>'.NL;
         }
@@ -404,10 +405,11 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
                 $R->doc .= '<td class="lastupdate">'.NL;
                 $R->doc .= hsc($row['lastupdate']);
                 $R->doc .= '</td>'.NL;
-                $R->doc .= '<td class="popularity">'.NL;
-                $progressCount = $row['popularity'].'/'.$popmax;
-                $progressWidth = sprintf(100*$row['popularity']/$popmax);
-                $R->doc .= '<div class="progress" title="'.$progressCount.'"><div style="width: '.$progressWidth.'%;"><span>'.$progressCount.'</span></div></div>';
+                // Remove Popularity column (and progress bar) for now
+                //$R->doc .= '<td class="popularity">'.NL;
+                //$progressCount = $row['popularity'].'/'.$popmax;
+                //$progressWidth = sprintf(100*$row['popularity']/$popmax);
+                //$R->doc .= '<div class="progress" title="'.$progressCount.'"><div style="width: '.$progressWidth.'%;"><span>'.$progressCount.'</span></div></div>';
                 $R->doc .= '</td>'.NL;
             }
 
@@ -486,7 +488,8 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
                 $R->doc .= '<td>';
                 $R->doc .= hsc($row['lastupdate']);
                 $R->doc .= '</td><td>';
-                $R->doc .= '<div class="prog-border" title="'.$row['popularity'].'/'.$popmax.'"><div class="prog-bar" style="width: '.sprintf(100*$row['popularity']/$popmax).'%;"></div></div>';
+                // Remove Popularity column for now
+                //$R->doc .= '<div class="prog-border" title="'.$row['popularity'].'/'.$popmax.'"><div class="prog-bar" style="width: '.sprintf(100*$row['popularity']/$popmax).'%;"></div></div>';
                 $R->doc .= '</td>';
             }
 
