@@ -11,6 +11,10 @@
 }
 
 /* layout */
+.dokuwiki div.pluginrepo_entry div.navigation {
+    width: 30%;
+	padding: .5em;
+}
 .dokuwiki div.pluginrepo_entry div.mainInfo,
 .dokuwiki div.pluginrepo_entry div.metaInfo,
 .dokuwiki div.pluginrepo_entry div.usageInfo {
@@ -151,11 +155,12 @@
     display: inline;
 }
 
-/* action links */
+/* action links and back button */
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions {
     margin-top: 2em;
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a {
+.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a,
+.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a {
     display: block;
     padding: .3em .3em .4em 37px;
     font-size: 120%;
@@ -166,7 +171,8 @@
     background-repeat: no-repeat;
     background-position: 2px 0;
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a:hover {
+.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a:hover,
+.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a:hover {
     border: 1px solid __border__;
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.bugs {
@@ -177,6 +183,9 @@
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.download {
     background-image: url(images/download.png);
+}
+.dokuwiki div.pluginrepo_entry div.navigation  ul.backButton a {
+    background-image: url(images/go-previous-orange.png);
 }
 
 /* author info */

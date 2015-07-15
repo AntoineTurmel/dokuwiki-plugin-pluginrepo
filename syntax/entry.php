@@ -108,6 +108,10 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $R->doc .= '<div class="pluginrepo_entry">'.NL;
 
+        $R->doc .= '<div class="navigation">'.NL;
+        $this->_showBackButton($R, $extensionType);
+        $R->doc .= '</div>'.NL;
+
         $R->doc .= '<div class="usageInfo">'.NL;
         $this->_showCompatibility($R, $data);
         $this->_showActionLinks($R, $data);
@@ -126,6 +130,13 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $this->_showAuthorInfo($R, $data, $rel);
 
         $R->doc .= '</div>'; // pluginrepo_entry
+    }
+
+    function _showBackButton(&$R, $extensionType) {
+        $R->doc .= '<ul class="backButton">'.NL;
+        $R->doc .= '<li><a class="download" href="'.wl($extensionType.'s').'">'.
+            $this->getLang('back').'</a></li>'.NL;
+        $R->doc .= '</ul>'.NL;
     }
 
     function _showMainInfo(&$R, $data, $extensionType) {

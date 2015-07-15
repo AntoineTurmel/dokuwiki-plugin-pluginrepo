@@ -36,6 +36,7 @@ $lang['bugtracker']          = 'Report bugs';
 $lang['sourcerepo']          = 'Repository';
 $lang['source']              = 'Source';
 $lang['donationurl']         = 'Donate';
+$lang['back']                = 'Back to Add-ons Page';
 
 // Plugin table
 $lang['t_search_plugins']    = 'Search Add-ons';
