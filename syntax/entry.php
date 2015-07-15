@@ -147,10 +147,16 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         */
 
         // icon and description
-        $extensionIcon = '<a class="media" href="'.wl($extensionType.'s').'">'.
-            '<img alt="'.$extensionType.'" class="medialeft" src="'.
-            DOKU_BASE.'lib/plugins/pluginrepo/images/dwplugin.png" width="75" height="75" /></a> ';
-        $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        if ($data['icon_img']) {
+            $val = $data['icon_img'];
+            $extensionIcon = '<img class="medialeft" src="'.ml($val).'" width="50" height="50" /></a> ';
+            $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        } else {
+            $extensionIcon = '<img class="medialeft" src="'.
+                DOKU_BASE.'lib/plugins/pluginrepo/images/addon_generic.png" width="50" height="50" /></a> ';
+            $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        }
+        
 
         // screenshot
         if ($data['screenshot_img']) {

@@ -80,9 +80,11 @@
 }
 
 /* mainInfo */
+/* comment below out because this creates an awkward gap if add-on description wraps around icon image -zjays
 .dokuwiki div.pluginrepo_entry div.mainInfo img.medialeft {
     margin-bottom: 1em;
 }
+*/
 .dokuwiki div.pluginrepo_entry div.mainInfo a.screenshot {
     display: block;
     margin-left: 1.5em;
