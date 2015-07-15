@@ -86,8 +86,10 @@
 }
 */
 .dokuwiki div.pluginrepo_entry div.mainInfo a.screenshot {
+    clear: left;
     display: block;
-    margin-left: 1.5em;
+    margin-top: 1em;
+	max-width: 65%;
 }
 
 /* metaInfo */

@@ -162,7 +162,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         if ($data['screenshot_img']) {
             $val = $data['screenshot_img'];
             $R->doc .= '<a href="'.ml($val).'" class="media screenshot" rel="lightbox">';
-            $R->doc .= '<img src="'.ml($val,"w=220").'" alt="" width="220" /></a>'.NL;
+            $R->doc .= '<img src="'.ml($val).'" alt="" /></a>'.NL;
         }
 
         $R->doc .= '</div>';
