@@ -171,7 +171,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     function _showMetaInfo(&$R, $data, $type, $rel) {
         global $ID;
         $target = getNS($ID);
-        if($target == 'plugin') {
+        if($target == 'add-on') {
             $target .= 's';
         }
 
@@ -313,7 +313,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     function _showTaxonomy(&$R, $data, $rel) {
         global $ID;
         $target = getNS($ID);
-        if($target == 'plugin') {
+        if($target == 'add-on') {
             $target .= 's';
         }
 
