@@ -282,12 +282,12 @@
 /* layout */
 .dokuwiki div.pluginrepo_table div.repoFilter {
     float: left;
-    width: 24%;
+    width: 35%;
 }
 .dokuwiki div.pluginrepo_table div.repoCloud {
     border-left: 1px solid __border__;
     padding: 0em 0 1.5em 2%;
-    width: 71%;
+    width: 60%;
     float: right;
     overflow: auto;
 }
