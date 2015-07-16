@@ -154,9 +154,6 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         } else {
             $shown = "A.tags <> '".$this->obsoleteTag."' AND A.securityissue = ''";
         }
-        if($filter['includetemplates'] != 'yes') {
-            $shown .= " AND A.type <> 32";
-        }
 
         if($tag) {
             if(!$this->types[$type]) {
@@ -486,11 +483,6 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $shown = "1";
         } else {
             $shown = "B.tags <> '".$this->obsoleteTag."' AND B.securityissue = ''";
-        }
-        if($filter['plugintype'] == 32) {
-            $shown .= ' AND B.type = 32';
-        } elseif(!$filter['includetemplates']) {
-            $shown .= ' AND B.type <> 32';
         }
 
         /** @var $stmt PDOStatement */

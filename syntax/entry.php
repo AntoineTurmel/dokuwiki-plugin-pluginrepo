@@ -103,7 +103,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $rel = $this->hlp->getPluginRelations($id);
         $type = $this->hlp->parsetype($data['type']);
-        $extensionType = ($type == 32) ? 'feather':'add-on';
+        $extensionType = 'add-on';
         $hasUnderscoreIssue = (strpos($id,'_') !== false);
 
         $R->doc .= '<div class="pluginrepo_entry">'.NL;
@@ -201,7 +201,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         }
 
         // plugin type
-        if($type && $type != 32){
+        if($type){
             $R->doc .= '<dt>'.$this->getLang('provides').'</dt>'.NL;
             $R->doc .= '<dd>'.$this->hlp->listtype($type,$target).'</dd>'.NL;
         }
