@@ -8,6 +8,7 @@
 
 // Plugin entry
 $lang['by']                  = 'by';
+$lang['version']             = 'Version';
 $lang['last_updated_on']     = 'Last updated on';
 $lang['provides']            = 'Categories';
 $lang['compatible_with']     = 'Compatible with Nightingale%s';

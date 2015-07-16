@@ -194,6 +194,12 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $R->doc .= '<div class="metaInfo"><dl>'.NL;
 
+        // version
+        if($data['version']) {
+            $R->doc .= '<dt>'.$this->getLang('version').'</dt>'.NL;
+            $R->doc .= '<dd>'.$data['version'].'</dd>'.NL;
+        }
+
         // last updated
         if(preg_match('/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$/',$data['lastupdate'])){
             $R->doc .= '<dt>'.$this->getLang('last_updated_on').'</dt>'.NL;
