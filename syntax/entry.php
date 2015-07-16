@@ -115,13 +115,11 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $R->doc .= '<div class="installation">'.NL;
         $this->_showDownloadButton($R, $data);
         $R->doc .= '</div>'.NL;
-
-        $R->doc .= '<div class="usageInfo">'.NL;
+		
+        $R->doc .= '<div class="compatibilityInfo">'.NL;
         $this->_showCompatibility($R, $data);
-        $this->_showActionLinks($R, $data);
         $R->doc .= '</div>'.NL;
-
-        $this->_showMainInfo($R, $data, $extensionType);
+		
         $this->_showMetaInfo($R, $data, $type, $rel);
 
         if($rel['similar'] || $data['tags'] || $data['securitywarning'] || $data['securityissue'] || $hasUnderscoreIssue) {
@@ -132,6 +130,12 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         }
 
         $this->_showAuthorInfo($R, $data, $rel);
+		
+        $R->doc .= '<div class="action">'.NL;
+		$this->_showActionLinks($R, $data);
+		$R->doc .= '</div>'.NL;
+
+        $this->_showMainInfo($R, $data);
 
         $R->doc .= '</div>'; // pluginrepo_entry
     }
@@ -143,7 +147,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $R->doc .= '</ul>'.NL;
     }
 
-     function _showDownloadButton(&$R, $data) {
+    function _showDownloadButton(&$R, $data) {
         if($data['downloadurl']) {
 		    $R->doc .= '<ul class="downloadButton">'.NL;
             $R->doc .= '<li><a class="download" href="'.hsc($data['downloadurl']).'">'.
@@ -152,7 +156,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         }		
     }
 
-    function _showMainInfo(&$R, $data, $extensionType) {
+    function _showMainInfo(&$R, $data) {
         $R->doc .= '<div class="mainInfo">'.NL;
 
         /* plugin/template name omitted because each page usually already has an h1 with the same information
@@ -281,12 +285,12 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     function _showActionLinks(&$R, $data) {
         if ($data['bugtracker'] || $data['donationurl']) {
             $R->doc .= '<ul class="actions">'.NL;
-            if($data['bugtracker'])
-                $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
-                           $this->getLang('bugtracker').'</a></li>'.NL;
             if($data['donationurl'])
                 $R->doc .= '<li><a class="donate" href="'.hsc($data['donationurl']).'">'.
                            $this->getLang('donationurl').'</a></li>'.NL;
+            if($data['bugtracker'])
+                $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
+                           $this->getLang('bugtracker').'</a></li>'.NL;
             $R->doc .= '</ul><div class="clearer"></div>'.NL;
         }
     }
@@ -326,25 +330,29 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         if($target == 'add-on') {
             $target .= 's';
         }
+        
+        $R->doc .= '<dl>'.NL;
 
         // similar extensions
         if ($rel['similar']) {
             $data['similar'] .= ','.join(',',$rel['similar']);
         }
         if($data['similar']){
-            $R->doc .= '<p class="similar">'.$this->getLang('similar_to').' ';
-            $R->doc .= $this->hlp->listplugins($data['similar'],$R).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('similar_to').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listplugins($data['similar'],$R).'</dd>'.NL;
         }
         // tags
         if($data['tags']){
-            $R->doc .= '<p class="tags">'.$this->getLang('tagged_with').' ';
-            $R->doc .= $this->hlp->listtags($data['tags'],$target).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('tagged_with').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listtags($data['tags'],$target).'</dd>'.NL;
         }
         // Needed for
         if($rel['needed']){
-            $R->doc .= '<p class="needed">'.$this->getLang('needed_for').' ';
-            $R->doc .= $this->hlp->listplugins($rel['needed'],$R).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('needed_for').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listplugins($rel['needed'],$R).'</dd>'.NL;
         }
+
+        $R->doc .= '</dl>'.NL;
     }
 
     function _showAuthorInfo(&$R, $data, $rel) {

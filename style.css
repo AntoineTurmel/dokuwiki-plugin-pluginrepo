@@ -2,54 +2,68 @@
 /*____________ entry ____________*/
 
 .dokuwiki div.pluginrepo_entry {
-    max-width: 800px;
     min-width: 230px;
     border: 1px solid __background_alt__;
     border-radius: 2px;
-    margin: 0 1.5em 1.5em 0;
+    margin: 0 0 1.5em 0;
     text-align: left;
+	overflow: auto;
 }
 
 /* layout */
+.dokuwiki div.pluginrepo_entry div.mainInfo,
+.dokuwiki div.pluginrepo_entry div.metaInfo,
+.dokuwiki div.pluginrepo_entry div.usageInfo {
+    padding: .5em;
+}
 .dokuwiki div.pluginrepo_entry div.navigation {
-    width: 30%;
+    width: auto;
 	padding: .5em;
 	float: left;
+	margin-bottom: -2em;
 }
 .dokuwiki div.pluginrepo_entry div.installation {
     width: 30%;
     padding: .5em;
 	float: right;
 }
-.dokuwiki div.pluginrepo_entry div.mainInfo,
-.dokuwiki div.pluginrepo_entry div.metaInfo,
-.dokuwiki div.pluginrepo_entry div.usageInfo {
-    float: left;
+.dokuwiki div.pluginrepo_entry div.compatibilityInfo {
+    width: 30%;
     padding: .5em;
-}
-.dokuwiki div.pluginrepo_entry div.mainInfo {
-    width: 42%;
-	clear: left;
+	float: right;
+	clear: right;
 }
 .dokuwiki div.pluginrepo_entry div.metaInfo {
-    width: 20%;
+    width: 30%;
+	float: right;
+	clear: right;
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo {
-    clear: right;
-	width: 30%;
-    float: right;
+.dokuwiki div.pluginrepo_entry div.moreInfo {
+    width: 30%;
+	float: right;
+	clear: right;
+	padding: .5em;
 }
-.dokuwiki div.pluginrepo_entry div.moreInfo,
 .dokuwiki div.pluginrepo_entry div.authorInfo {
-    clear: left;
+    width: 30%;
+    float: right;
+    clear: right;
     padding: .5em;
 }
-
+.dokuwiki div.pluginrepo_entry div.action {
+    width: 30%;
+    padding: .5em;
+	float: right;
+	clear: right;
+}
+.dokuwiki div.pluginrepo_entry div.mainInfo {
+	max-width: 65%;
+	overflow: auto;
+}
 
 /* just for the new template */
 .dokuwiki #dokuwiki__content div.pluginrepo_entry div.mainInfo {
     width: auto;
-    float: none;
 }
 .dokuwiki #dokuwiki__content div.pluginrepo_entry div.metaInfo {
     width: auto;
@@ -62,6 +76,19 @@
     margin-right: .5em;
 }
 .dokuwiki #dokuwiki__content div.pluginrepo_entry div.metaInfo dd {
+    margin-bottom: .2em;
+}
+.dokuwiki #dokuwiki__content div.pluginrepo_entry div.moreInfo {
+    width: auto;
+    float: none;
+    clear: left;
+}
+.dokuwiki #dokuwiki__content div.pluginrepo_entry div.moreInfo dt {
+    float: left;
+    clear: left;
+    margin-right: .5em;
+}
+.dokuwiki #dokuwiki__content div.pluginrepo_entry div.moreInfo dd {
     margin-bottom: .2em;
 }
 
@@ -88,25 +115,32 @@
 }
 
 /* mainInfo */
-/* comment below out because this creates an awkward gap if add-on description wraps around icon image -zjays
 .dokuwiki div.pluginrepo_entry div.mainInfo img.medialeft {
-    margin-bottom: 1em;
+    /* comment below out because this creates an awkward gap if add-on description wraps around icon image -zjays
+    margin-bottom: 1em;*/
+    float: left;
 }
-*/
+
 .dokuwiki div.pluginrepo_entry div.mainInfo a.screenshot {
     clear: left;
     display: block;
     margin-top: 1em;
-	max-width: 65%;
 }
 
 /* metaInfo */
-.dokuwiki div.pluginrepo_entry div.metaInfo {
-}
 .dokuwiki div.pluginrepo_entry div.metaInfo dl {
     margin-bottom: 0;
+    width: 30%;
+    float: right;
+    clear: right;
 }
-
+/* moreInfo */
+.dokuwiki div.pluginrepo_entry div.moreInfo dl {
+    margin-bottom: 0;
+    width: 30%;
+    float: right;
+    clear: right;
+}
 /* usageInfo */
 .dokuwiki div.pluginrepo_entry div.compatibility p.label {
     font-weight: bold;
@@ -167,11 +201,8 @@
     display: inline;
 }
 
-/* action links and back button */
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions {
-    margin-top: 2em;
-}
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a,
+/* action, back, download buttons */
+.dokuwiki div.pluginrepo_entry div.action ul.actions a,
 .dokuwiki div.pluginrepo_entry div.navigation ul.backButton a,
 .dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a {
     display: block;
@@ -184,15 +215,15 @@
     background-repeat: no-repeat;
     background-position: 2px 0;
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a:hover,
+.dokuwiki div.pluginrepo_entry div.action ul.actions a:hover,
 .dokuwiki div.pluginrepo_entry div.navigation ul.backButton a:hover,
 .dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a:hover {
     border: 1px solid __border__;
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.bugs {
+.dokuwiki div.pluginrepo_entry div.action ul.actions a.bugs {
     background-image: url(images/bugs.png);
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.donate {
+.dokuwiki div.pluginrepo_entry div.action ul.actions a.donate {
     background-image: url(images/donate.png);
 }
 .dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a {
@@ -228,6 +259,8 @@
     margin-bottom: .5em;
     background-position: .5em .5em;
     padding-left: 2.5em;
+	float: right;
+	clear: right;
 }
 
 
