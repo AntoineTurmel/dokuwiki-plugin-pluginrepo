@@ -31,7 +31,7 @@ $lang['securityissue']       = 'The following security issue was reported for th
 $lang['securityrecommendation']   = 'It is not recommended to use this add-on until this issue was fixed. Add-on authors should read the %s';
 $lang['securitylink']        = 'add-on security guidelines';
 $lang['name_underscore']     = 'Add-on name contains underscore, will not generate popularity points.';
-$lang['downloadurl']         = 'Download';
+$lang['downloadurl']         = 'Add to Nightingale';
 $lang['bugtracker']          = 'Report bugs';
 $lang['sourcerepo']          = 'Repository';
 $lang['source']              = 'Source';
@@ -85,7 +85,7 @@ $lang['t_compatible']        = 'Last Compatible';
 $lang['t_sortcompatible']    = 'Sort by compatibility';
 $lang['t_screenshot']        = 'Screenshot';
 
-$lang['t_download']          = 'Download';
+$lang['t_download']          = 'Add to Nightingale';
 $lang['t_provides']          = 'Categories';
 $lang['t_tags']              = 'Tags';
 $lang['t_bundled']           = 'bundled';

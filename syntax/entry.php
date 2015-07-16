@@ -112,6 +112,10 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $this->_showBackButton($R, $extensionType);
         $R->doc .= '</div>'.NL;
 
+        $R->doc .= '<div class="installation">'.NL;
+        $this->_showDownloadButton($R, $data);
+        $R->doc .= '</div>'.NL;
+
         $R->doc .= '<div class="usageInfo">'.NL;
         $this->_showCompatibility($R, $data);
         $this->_showActionLinks($R, $data);
@@ -134,9 +138,18 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
     function _showBackButton(&$R, $extensionType) {
         $R->doc .= '<ul class="backButton">'.NL;
-        $R->doc .= '<li><a class="download" href="'.wl($extensionType.'s').'">'.
+        $R->doc .= '<li><a class="back" href="'.wl($extensionType.'s').'">'.
             $this->getLang('back').'</a></li>'.NL;
         $R->doc .= '</ul>'.NL;
+    }
+
+     function _showDownloadButton(&$R, $data) {
+        if($data['downloadurl']) {
+		    $R->doc .= '<ul class="downloadButton">'.NL;
+            $R->doc .= '<li><a class="download" href="'.hsc($data['downloadurl']).'">'.
+                $this->getLang('downloadurl').'</a></li>'.NL;
+            $R->doc .= '</ul>'.NL;
+        }		
     }
 
     function _showMainInfo(&$R, $data, $extensionType) {
@@ -266,11 +279,8 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     }
 
     function _showActionLinks(&$R, $data) {
-        if ($data['downloadurl'] || $data['bugtracker'] || $data['donationurl']) {
+        if ($data['bugtracker'] || $data['donationurl']) {
             $R->doc .= '<ul class="actions">'.NL;
-            if($data['downloadurl'])
-                $R->doc .= '<li><a class="download" href="'.hsc($data['downloadurl']).'">'.
-                           $this->getLang('downloadurl').'</a></li>'.NL;
             if($data['bugtracker'])
                 $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
                            $this->getLang('bugtracker').'</a></li>'.NL;

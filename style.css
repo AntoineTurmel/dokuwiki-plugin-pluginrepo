@@ -14,6 +14,12 @@
 .dokuwiki div.pluginrepo_entry div.navigation {
     width: 30%;
 	padding: .5em;
+	float: left;
+}
+.dokuwiki div.pluginrepo_entry div.installation {
+    width: 30%;
+    padding: .5em;
+	float: right;
 }
 .dokuwiki div.pluginrepo_entry div.mainInfo,
 .dokuwiki div.pluginrepo_entry div.metaInfo,
@@ -23,12 +29,14 @@
 }
 .dokuwiki div.pluginrepo_entry div.mainInfo {
     width: 42%;
+	clear: left;
 }
 .dokuwiki div.pluginrepo_entry div.metaInfo {
     width: 20%;
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo {
-    width: 30%;
+    clear: right;
+	width: 30%;
     float: right;
 }
 .dokuwiki div.pluginrepo_entry div.moreInfo,
@@ -164,7 +172,8 @@
     margin-top: 2em;
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a,
-.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a {
+.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a,
+.dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a {
     display: block;
     padding: .3em .3em .4em 37px;
     font-size: 120%;
@@ -176,7 +185,8 @@
     background-position: 2px 0;
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a:hover,
-.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a:hover {
+.dokuwiki div.pluginrepo_entry div.navigation ul.backButton a:hover,
+.dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a:hover {
     border: 1px solid __border__;
 }
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.bugs {
@@ -185,8 +195,8 @@
 .dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.donate {
     background-image: url(images/donate.png);
 }
-.dokuwiki div.pluginrepo_entry div.usageInfo ul.actions a.download {
-    background-image: url(images/download.png);
+.dokuwiki div.pluginrepo_entry div.installation ul.downloadButton a {
+    background-image: url(images/add.png);
 }
 .dokuwiki div.pluginrepo_entry div.navigation  ul.backButton a {
     background-image: url(images/go-previous-orange.png);
@@ -329,7 +339,7 @@
     font-style: normal;
     font-weight: bold;
     float: right;
-    background: transparent url(images/download.gif) 0 2px no-repeat;
+    background: transparent url(images/add_table.png) 0 2px no-repeat;
     padding: 0 0 0 12px;
 }
 
