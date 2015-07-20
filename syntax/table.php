@@ -376,6 +376,8 @@ class syntax_plugin_pluginrepo_table extends DokuWiki_Syntax_Plugin {
             $R->doc .= '<dd>'.$this->hlp->listtype($row['type'],$ID).'</dd>'.NL;
             $R->doc .= '<dt>'.$this->getLang('t_tags').':</dt>'.NL;
             $R->doc .= '<dd>'.$this->hlp->listtags($row['tags'],$ID).'</dd>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('version').':</dt>'.NL;
+            $R->doc .= '<dd>'.$row['version'].'</dd>'.NL;
             $R->doc .= '<dt class="author">'.$this->getLang('t_author').':</dt>'.NL;
             $R->doc .= '<dd class="author">';
             $R->emaillink($row['email'],$row['author']);

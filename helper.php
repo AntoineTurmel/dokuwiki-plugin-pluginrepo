@@ -729,7 +729,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         $db->exec('CREATE TABLE plugin_tags (plugin varchar(50) NOT NULL, tag varchar(255) NOT NULL);');
         $db->exec(
             'CREATE TABLE plugins (plugin varchar(50) PRIMARY KEY NOT NULL, name varchar(255) default NULL,
-                                   description varchar(255) default NULL, author varchar(255) default NULL, email varchar(255) default NULL,
+                                   description varchar(255) default NULL, version varchar(255) default NULL, author varchar(255) default NULL, email varchar(255) default NULL,
                                    compatible varchar(255) default NULL, lastupdate date default NULL, downloadurl varchar(255) default NULL,
                                    bugtracker varchar(255) default NULL, sourcerepo varchar(255) default NULL, donationurl varchar(255) default NULL, type int(11) NOT NULL default 0,
                                    screenshot varchar(255) default NULL, tags varchar(255) default NULL, securitywarning varchar(255) default NULL, securityissue varchar(255) NOT NULL,

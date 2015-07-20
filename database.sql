@@ -82,6 +82,7 @@ CREATE TABLE `plugins` (
   `plugin` varchar(50) NOT NULL,
   `name` varchar(255) default NULL,
   `description` varchar(255) default NULL,
+  `version` varchar(255) default NULL,  
   `author` varchar(255) default NULL,
   `email` varchar(255) default NULL,
   `compatible` varchar(255) default NULL,

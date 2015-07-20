@@ -417,6 +417,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             $duplicate = 'ON DUPLICATE KEY UPDATE
                                 name            = :name,
                                 description     = :description,
+                                version         = :version,
                                 author          = :author,
                                 email           = LOWER(:email),
                                 compatible      = :compatible,
@@ -440,13 +441,13 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $stmt = $db->prepare($insert.' INTO plugins
                                (plugin, name, description,
-                                author, email,
+                                version, author, email,
                                 compatible, bestcompatible, lastupdate, securityissue, securitywarning,
                                 downloadurl, bugtracker, sourcerepo, donationurl,
                                 screenshot, tags, type)
                               VALUES
                                (:plugin, :name, :description,
-                                :author, LOWER(:email),
+                                :version, :author, LOWER(:email),
                                 :compatible, :bestcompatible, :lastupdate, :securityissue, :securitywarning,
                                 :downloadurl, :bugtracker, :sourcerepo, :donationurl,
                                 :screenshot, :tags, :type)
@@ -454,6 +455,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $stmt->execute(array(':plugin' =>  $id,
                              ':name' => $name,
                              ':description' => $data['description'],
+                             ':version' => $data['version'],
                              ':author' => $data['author'],
                              ':email' => $data['email'],
                              ':compatible' => $data['compatible'],

@@ -23,4 +23,4 @@ CREATE INDEX idx_type  ON plugins (type);
 CREATE INDEX idx_popularity  ON plugins (popularity);
 CREATE INDEX idx_lastupdate  ON plugins (lastupdate);
 
-CREATE FULLTEXT INDEX idx_search ON plugins(plugin, name, description, author, tags);
+CREATE FULLTEXT INDEX idx_search ON plugins(plugin, name, description, version, author, tags);
