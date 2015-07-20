@@ -322,12 +322,12 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             $R->doc .= '</p>'.NL.'<p>'.sprintf($this->getLang('securityrecommendation'),$securitylink).'</p>'.NL;
             $R->doc .= '</div>'.NL;
         }
-
+        /*Not relevant to Nightingale add-ons (for now)
         if($hasUnderscoreIssue) {
             $R->doc .= '<div class="info"><p>';
             $R->doc .= $this->getLang('name_underscore');
             $R->doc .= '</p></div>'.NL;
-        }
+        }*/
     }
 
     function _showTaxonomy(&$R, $data, $rel) {
