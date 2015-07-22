@@ -126,7 +126,8 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
      *   'pluginsort' (string)
      *   'showall'    (yes/no) default/unset is 'no' and obsolete plugins and security issues are not returned
      *   'includetemplates' (yes/no) default/unset is 'no' and template data will not be returned
-     */
+     * Change 32 to 33 in function below to fix table sorting issues for plugin 32 (Tools & Utilities)...not the most proper fix, but I didn't know how to properly re-write it otherwise! - zjays
+	 */
     public function getPlugins($filter = null) {
         $db = $this->_getPluginsDB();
         if(!$db) return array();
@@ -162,14 +163,14 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugin_tags B, plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                            AND (A.type & :type)
                                            AND A.plugin = B.plugin
                                            AND B.tag = :tag
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugin_tags B, plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                            AND (A.type & :type)
                                            AND A.plugin = B.plugin
                                            AND B.tag = :tag
@@ -181,12 +182,12 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                            AND (A.type & :type)
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                            AND (A.type & :type)
                                  $sortsql"
             );
@@ -196,12 +197,12 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                     $pluginsql
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                     $pluginsql
                                  $sortsql"
             );
