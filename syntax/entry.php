@@ -103,17 +103,23 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $rel = $this->hlp->getPluginRelations($id);
         $type = $this->hlp->parsetype($data['type']);
-        $extensionType = ($type == 32) ? 'feather':'add-on';
+        $extensionType = 'add-on';
         $hasUnderscoreIssue = (strpos($id,'_') !== false);
 
         $R->doc .= '<div class="pluginrepo_entry">'.NL;
 
-        $R->doc .= '<div class="usageInfo">'.NL;
-        $this->_showCompatibility($R, $data);
-        $this->_showActionLinks($R, $data);
+        $R->doc .= '<div class="navigation">'.NL;
+        $this->_showBackButton($R, $extensionType);
         $R->doc .= '</div>'.NL;
 
-        $this->_showMainInfo($R, $data, $extensionType);
+        $R->doc .= '<div class="installation">'.NL;
+        $this->_showDownloadButton($R, $data);
+        $R->doc .= '</div>'.NL;
+		
+        $R->doc .= '<div class="compatibilityInfo">'.NL;
+        $this->_showCompatibility($R, $data);
+        $R->doc .= '</div>'.NL;
+		
         $this->_showMetaInfo($R, $data, $type, $rel);
 
         if($rel['similar'] || $data['tags'] || $data['securitywarning'] || $data['securityissue'] || $hasUnderscoreIssue) {
@@ -124,11 +130,33 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         }
 
         $this->_showAuthorInfo($R, $data, $rel);
+		
+        $R->doc .= '<div class="action">'.NL;
+		$this->_showActionLinks($R, $data);
+		$R->doc .= '</div>'.NL;
+
+        $this->_showMainInfo($R, $data);
 
         $R->doc .= '</div>'; // pluginrepo_entry
     }
 
-    function _showMainInfo(&$R, $data, $extensionType) {
+    function _showBackButton(&$R, $extensionType) {
+        $R->doc .= '<ul class="backButton">'.NL;
+        $R->doc .= '<li><a class="back" href="'.wl($extensionType.'s').'">'.
+            $this->getLang('back').'</a></li>'.NL;
+        $R->doc .= '</ul>'.NL;
+    }
+
+    function _showDownloadButton(&$R, $data) {
+        if($data['downloadurl']) {
+		    $R->doc .= '<ul class="downloadButton">'.NL;
+            $R->doc .= '<li><a class="download" href="'.hsc($data['downloadurl']).'">'.
+                $this->getLang('downloadurl').'</a></li>'.NL;
+            $R->doc .= '</ul>'.NL;
+        }		
+    }
+
+    function _showMainInfo(&$R, $data) {
         $R->doc .= '<div class="mainInfo">'.NL;
 
         /* plugin/template name omitted because each page usually already has an h1 with the same information
@@ -136,16 +164,22 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         */
 
         // icon and description
-        $extensionIcon = '<a class="media" href="'.wl($extensionType.'s').'">'.
-            '<img alt="'.$extensionType.'" class="medialeft" src="'.
-            DOKU_BASE.'lib/plugins/pluginrepo/images/dwplugin.png" width="75" height="75" /></a> ';
-        $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        if ($data['icon_img']) {
+            $val = $data['icon_img'];
+            $extensionIcon = '<img class="medialeft" src="'.ml($val).'" width="50" height="50" /></a> ';
+            $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        } else {
+            $extensionIcon = '<img class="medialeft" src="'.
+                DOKU_BASE.'lib/plugins/pluginrepo/images/addon_generic.png" width="50" height="50" /></a> ';
+            $R->doc .= '<p class="description">'.$extensionIcon.hsc($data['description']).'</p>'.NL;
+        }
+        
 
         // screenshot
         if ($data['screenshot_img']) {
             $val = $data['screenshot_img'];
             $R->doc .= '<a href="'.ml($val).'" class="media screenshot" rel="lightbox">';
-            $R->doc .= '<img src="'.ml($val,"w=220").'" alt="" width="220" /></a>'.NL;
+            $R->doc .= '<img src="'.ml($val).'" alt="" /></a>'.NL;
         }
 
         $R->doc .= '</div>';
@@ -154,11 +188,17 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     function _showMetaInfo(&$R, $data, $type, $rel) {
         global $ID;
         $target = getNS($ID);
-        if($target == 'plugin') {
+        if($target == 'add-on') {
             $target .= 's';
         }
 
         $R->doc .= '<div class="metaInfo"><dl>'.NL;
+
+        // version
+        if($data['version']) {
+            $R->doc .= '<dt>'.$this->getLang('version').'</dt>'.NL;
+            $R->doc .= '<dd>'.$data['version'].'</dd>'.NL;
+        }
 
         // last updated
         if(preg_match('/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$/',$data['lastupdate'])){
@@ -167,7 +207,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         }
 
         // plugin type
-        if($type && $type != 32){
+        if($type){
             $R->doc .= '<dt>'.$this->getLang('provides').'</dt>'.NL;
             $R->doc .= '<dd>'.$this->hlp->listtype($type,$target).'</dd>'.NL;
         }
@@ -249,17 +289,17 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
     }
 
     function _showActionLinks(&$R, $data) {
-        if ($data['downloadurl'] || $data['bugtracker'] || $data['donationurl']) {
+        if ($data['bugtracker'] || $data['donationurl']) {
             $R->doc .= '<ul class="actions">'.NL;
-            if($data['downloadurl'])
-                $R->doc .= '<li><a class="download" href="'.hsc($data['downloadurl']).'">'.
-                           $this->getLang('downloadurl').'</a></li>'.NL;
-            if($data['bugtracker'])
-                $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
-                           $this->getLang('bugtracker').'</a></li>'.NL;
             if($data['donationurl'])
                 $R->doc .= '<li><a class="donate" href="'.hsc($data['donationurl']).'">'.
                            $this->getLang('donationurl').'</a></li>'.NL;
+                if(($data['donationurl']) == 'https://www.bountysource.com/teams/nightingale') {
+					$R->doc .= '<p>'.$this->getLang('donation_nightingale').'</p>';
+				}
+            if($data['bugtracker'])
+                $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
+                           $this->getLang('bugtracker').'</a></li>'.NL;
             $R->doc .= '</ul><div class="clearer"></div>'.NL;
         }
     }
@@ -285,39 +325,43 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             $R->doc .= '</p>'.NL.'<p>'.sprintf($this->getLang('securityrecommendation'),$securitylink).'</p>'.NL;
             $R->doc .= '</div>'.NL;
         }
-
+        /*Not relevant to Nightingale add-ons (for now)
         if($hasUnderscoreIssue) {
             $R->doc .= '<div class="info"><p>';
             $R->doc .= $this->getLang('name_underscore');
             $R->doc .= '</p></div>'.NL;
-        }
+        }*/
     }
 
     function _showTaxonomy(&$R, $data, $rel) {
         global $ID;
         $target = getNS($ID);
-        if($target == 'plugin') {
+        if($target == 'add-on') {
             $target .= 's';
         }
+        
+        $R->doc .= '<dl>'.NL;
 
         // similar extensions
         if ($rel['similar']) {
             $data['similar'] .= ','.join(',',$rel['similar']);
         }
         if($data['similar']){
-            $R->doc .= '<p class="similar">'.$this->getLang('similar_to').' ';
-            $R->doc .= $this->hlp->listplugins($data['similar'],$R).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('similar_to').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listplugins($data['similar'],$R).'</dd>'.NL;
         }
         // tags
         if($data['tags']){
-            $R->doc .= '<p class="tags">'.$this->getLang('tagged_with').' ';
-            $R->doc .= $this->hlp->listtags($data['tags'],$target).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('tagged_with').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listtags($data['tags'],$target).'</dd>'.NL;
         }
         // Needed for
         if($rel['needed']){
-            $R->doc .= '<p class="needed">'.$this->getLang('needed_for').' ';
-            $R->doc .= $this->hlp->listplugins($rel['needed'],$R).'</p>'.NL;
+            $R->doc .= '<dt>'.$this->getLang('needed_for').'</dt>'.NL;
+            $R->doc .= '<dd>'.$this->hlp->listplugins($rel['needed'],$R).'</dd>'.NL;
         }
+
+        $R->doc .= '</dl>'.NL;
     }
 
     function _showAuthorInfo(&$R, $data, $rel) {
@@ -376,6 +420,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             $duplicate = 'ON DUPLICATE KEY UPDATE
                                 name            = :name,
                                 description     = :description,
+                                version         = :version,
                                 author          = :author,
                                 email           = LOWER(:email),
                                 compatible      = :compatible,
@@ -399,13 +444,13 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
 
         $stmt = $db->prepare($insert.' INTO plugins
                                (plugin, name, description,
-                                author, email,
+                                version, author, email,
                                 compatible, bestcompatible, lastupdate, securityissue, securitywarning,
                                 downloadurl, bugtracker, sourcerepo, donationurl,
                                 screenshot, tags, type)
                               VALUES
                                (:plugin, :name, :description,
-                                :author, LOWER(:email),
+                                :version, :author, LOWER(:email),
                                 :compatible, :bestcompatible, :lastupdate, :securityissue, :securitywarning,
                                 :downloadurl, :bugtracker, :sourcerepo, :donationurl,
                                 :screenshot, :tags, :type)
@@ -413,6 +458,7 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
         $stmt->execute(array(':plugin' =>  $id,
                              ':name' => $name,
                              ':description' => $data['description'],
+                             ':version' => $data['version'],
                              ':author' => $data['author'],
                              ':email' => $data['email'],
                              ':compatible' => $data['compatible'],

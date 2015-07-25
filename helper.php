@@ -12,12 +12,13 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
     public $dokuReleases; // array of DokuWiki releases (name & date)
 
     public $types = array(
-        1  => 'Music & Video',
-        2  => 'Library & Playlists',
-        4  => 'Device & Services',
-        8  => 'Web Browser',
-        16 => 'Tools',
-        32 => 'Feathers'
+        1  => 'Library & Playlists',
+        2  => 'Sound & Playback',
+        4  => 'Devices & Hardware',
+        8  => 'Web Services',
+        16 => 'Web Browser',
+        32 => 'Tools & Utilities',
+        64 => 'Feathers'
     );
 
 
@@ -125,7 +126,8 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
      *   'pluginsort' (string)
      *   'showall'    (yes/no) default/unset is 'no' and obsolete plugins and security issues are not returned
      *   'includetemplates' (yes/no) default/unset is 'no' and template data will not be returned
-     */
+     * Change 32 to 33 in function below to fix table sorting issues for plugin 32 (Tools & Utilities)...not the most proper fix, but I didn't know how to properly re-write it otherwise! - zjays
+	 */
     public function getPlugins($filter = null) {
         $db = $this->_getPluginsDB();
         if(!$db) return array();
@@ -153,9 +155,6 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         } else {
             $shown = "A.tags <> '".$this->obsoleteTag."' AND A.securityissue = ''";
         }
-        if($filter['includetemplates'] != 'yes') {
-            $shown .= " AND A.type <> 32";
-        }
 
         if($tag) {
             if(!$this->types[$type]) {
@@ -164,14 +163,14 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugin_tags B, plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                            AND (A.type & :type)
                                            AND A.plugin = B.plugin
                                            AND B.tag = :tag
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugin_tags B, plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                            AND (A.type & :type)
                                            AND A.plugin = B.plugin
                                            AND B.tag = :tag
@@ -183,12 +182,12 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                            AND (A.type & :type)
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                            AND (A.type & :type)
                                  $sortsql"
             );
@@ -198,12 +197,12 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
             $stmt = $db->prepare(
                 "      SELECT A.*, SUBSTR(A.plugin,10) as simplename
                                           FROM plugins A
-                                         WHERE A.type = 32 AND $shown
+                                         WHERE A.type = 33 AND $shown
                                     $pluginsql
                                  UNION
                                         SELECT A.*, A.plugin as simplename
                                           FROM plugins A
-                                         WHERE A.type <> 32 AND $shown
+                                         WHERE A.type <> 33 AND $shown
                                     $pluginsql
                                  $sortsql"
             );
@@ -486,11 +485,6 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         } else {
             $shown = "B.tags <> '".$this->obsoleteTag."' AND B.securityissue = ''";
         }
-        if($filter['plugintype'] == 32) {
-            $shown .= ' AND B.type = 32';
-        } elseif(!$filter['includetemplates']) {
-            $shown .= ' AND B.type <> 32';
-        }
 
         /** @var $stmt PDOStatement */
         $stmt = $db->prepare(
@@ -736,7 +730,7 @@ class helper_plugin_pluginrepo extends DokuWiki_Plugin {
         $db->exec('CREATE TABLE plugin_tags (plugin varchar(50) NOT NULL, tag varchar(255) NOT NULL);');
         $db->exec(
             'CREATE TABLE plugins (plugin varchar(50) PRIMARY KEY NOT NULL, name varchar(255) default NULL,
-                                   description varchar(255) default NULL, author varchar(255) default NULL, email varchar(255) default NULL,
+                                   description varchar(255) default NULL, version varchar(255) default NULL, author varchar(255) default NULL, email varchar(255) default NULL,
                                    compatible varchar(255) default NULL, lastupdate date default NULL, downloadurl varchar(255) default NULL,
                                    bugtracker varchar(255) default NULL, sourcerepo varchar(255) default NULL, donationurl varchar(255) default NULL, type int(11) NOT NULL default 0,
                                    screenshot varchar(255) default NULL, tags varchar(255) default NULL, securitywarning varchar(255) default NULL, securityissue varchar(255) NOT NULL,

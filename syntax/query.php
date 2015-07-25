@@ -13,7 +13,7 @@ class syntax_plugin_pluginrepo_query extends DokuWiki_Syntax_Plugin {
      * will hold the repository helper plugin
      */
     var $hlp = null;
-    var $allowedfields = array('plugin','name','description','author','email','compatible',
+    var $allowedfields = array('plugin','name','description','version','author','email','compatible',
                                'lastupdate','type','securityissue','securitywarning','screenshot',
                                'downloadurl','bugtracker','sourcerepo','donationurl','tags','popularity');
 
