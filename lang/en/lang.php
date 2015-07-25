@@ -38,6 +38,7 @@ $lang['sourcerepo']          = 'Repository';
 $lang['source']              = 'Source';
 $lang['donationurl']         = 'Donate';
 $lang['back']                = 'Back to Add-ons Page';
+$lang['donation_nightingale']= 'The add-on author has requested that any donations be directed to the Nightingale project. The above donation link will take you to the Nightingale Bountysource page.';
 
 // Plugin table
 $lang['t_search_plugins']    = 'Search Add-ons';

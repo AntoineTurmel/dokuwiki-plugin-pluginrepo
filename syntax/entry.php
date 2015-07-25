@@ -294,6 +294,9 @@ class syntax_plugin_pluginrepo_entry extends DokuWiki_Syntax_Plugin {
             if($data['donationurl'])
                 $R->doc .= '<li><a class="donate" href="'.hsc($data['donationurl']).'">'.
                            $this->getLang('donationurl').'</a></li>'.NL;
+                if(($data['donationurl']) == 'https://www.bountysource.com/teams/nightingale') {
+					$R->doc .= '<p>'.$this->getLang('donation_nightingale').'</p>';
+				}
             if($data['bugtracker'])
                 $R->doc .= '<li><a class="bugs" href="'.hsc($data['bugtracker']).'">'.
                            $this->getLang('bugtracker').'</a></li>'.NL;
